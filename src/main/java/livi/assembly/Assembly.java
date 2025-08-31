@@ -1,5 +1,6 @@
 package livi.assembly;
 
+import livi.assembly.Blocks.ModBlocks;
 import livi.assembly.items.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -23,6 +24,7 @@ public class Assembly implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 		LOGGER.info("hallo pablo");
 
-		ModItems.register_items();
+		//ModItems.register_items();
+        ModBlocks.initialize();
 	}
 }
