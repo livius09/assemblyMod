@@ -1,6 +1,7 @@
 package livi.assembly.items;
 
 import livi.assembly.Assembly;
+import livi.assembly.Blocks.ModBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
@@ -41,10 +42,10 @@ public class ModItems {
         Registry.register(Registries.ITEM_GROUP, ASSEMBLY_ITEM_GROUP_KEY, ASSEMBLY_ITEM_GROUP);
 
         ItemGroupEvents.modifyEntriesEvent(ASSEMBLY_ITEM_GROUP_KEY).register(entries ->{
-            entries.add(BELT);
-            entries.add(SHOCKER);
-            entries.add(BREAKER);
-            entries.add(FARMER);
+            entries.add(ModBlocks.BELT_BLOCK.asItem());
+            entries.add(ModBlocks.SHOCKER_BLOCK.asItem());
+            entries.add(ModBlocks.BREAKER_BLOCK.asItem());
+            entries.add(ModBlocks.FARMER_BLOCK.asItem());
 
         });
 

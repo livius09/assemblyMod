@@ -24,7 +24,8 @@ public class Assembly implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 		LOGGER.info("hallo pablo");
 
-		//ModItems.register_items();
         ModBlocks.initialize();
+		ModItems.register_items();
+
 	}
 }

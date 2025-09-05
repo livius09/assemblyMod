@@ -29,23 +29,24 @@ public class ModBlocks {
         Assembly.LOGGER.info("Registering blocks...");
 
         // Register each block
-        BELT_BLOCK = register("belt_block", BeltBlock::new, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
+        BELT_BLOCK = register("belt_block", BeltBlock::new, AbstractBlock.Settings.copy(Blocks.BRICK_SLAB));
         SHOCKER_BLOCK = register("shocker_block", BeltBlock::new, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
         BREAKER_BLOCK = register("breaker_block", BreakerBlock::new, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
         FARMER_BLOCK = register("farmer_block", FarmerBlock::new, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
 
         // Optional: also ensure they appear in your custom creative tab
+        /*
         ItemGroupEvents.modifyEntriesEvent(ModItems.ASSEMBLY_ITEM_GROUP_KEY).register(entries -> {
             entries.add(BELT_BLOCK.asItem());
             entries.add(SHOCKER_BLOCK.asItem());
             entries.add(BREAKER_BLOCK.asItem());
             entries.add(FARMER_BLOCK.asItem());
         });
+        */
+
     }
 
-    /**
-     * Generic block registration method that also registers a BlockItem in your creative tab.
-     */
+
     private static Block register(String name, Function<AbstractBlock.Settings, Block> blockFactory, AbstractBlock.Settings settings) {
         // Create a registry key for the block
         RegistryKey<Block> blockKey = keyOfBlock(name);
@@ -55,12 +56,13 @@ public class ModBlocks {
         // Sometimes, you may not want to register an item for the block.
         // Eg: if it's a technical block like `minecraft:moving_piston` or `minecraft:end_gateway`
 
-            // Items need to be registered with a different type of registry key, but the ID
-            // can be the same.
+        // Items need to be registered with a different type of registry key, but the ID
+        // can be the same.
         RegistryKey<Item> itemKey = keyOfItem(name);
 
         BlockItem blockItem = new BlockItem(block, new Item.Settings().registryKey(itemKey));
         Registry.register(Registries.ITEM, itemKey, blockItem);
+
 
         return Registry.register(Registries.BLOCK, blockKey, block);
     }

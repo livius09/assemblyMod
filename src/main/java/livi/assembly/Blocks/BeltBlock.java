@@ -14,6 +14,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 
 import java.util.List;
 
@@ -42,25 +43,38 @@ public class BeltBlock extends HorizontalFacingBlock {
         return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
+    @Override
+    public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
+        super.onBlockAdded(state, world, pos, oldState, notify);
+
+        // Schedule the first tick (20 ticks = 1 second)
+        world.scheduleBlockTick(pos, this, 2);
+    }
+
+
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-        Box area = new Box(pos).expand(0.2); // small box above belt
+        Box area = new Box(pos).expand(0.2); // detect items
+
         List<ItemEntity> items = world.getEntitiesByClass(ItemEntity.class, area, item -> true);
 
         for (ItemEntity item : items) {
             Direction dir = state.get(FACING);
-            Vec3d push = Vec3d.of(dir.getVector()).multiply(0.1); // push speed
+            Vec3d push = Vec3d.of(dir.getVector()).multiply(-0.1); //whitout the - it pushes against the placed direction
             item.addVelocity(push.x, 0, push.z);
 
-            // Centering: push item slightly toward belt center
+            // Centering toward belt middle
             double centerX = pos.getX() + 0.5;
             double centerZ = pos.getZ() + 0.5;
             double dx = (centerX - item.getX()) * 0.05;
             double dz = (centerZ - item.getZ()) * 0.05;
             item.addVelocity(dx, 0, dz);
+
+            item.velocityModified = true; // tell MC that velocity changed
         }
 
-        world.scheduleBlockTick(pos, this, 2); // reschedule tick
+        // Always reschedule
+        world.scheduleBlockTick(pos, this, 2);
     }
 }
