@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "assembly:block/belt_block" },
+    "facing=south": { "model": "assembly:block/belt_block", "y": 180 },
+    "facing=west":  { "model": "assembly:block/belt_block", "y": 270 },
+    "facing=east":  { "model": "assembly:block/belt_block", "y": 90 }
+  }
+}

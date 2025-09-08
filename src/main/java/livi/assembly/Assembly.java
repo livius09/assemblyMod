@@ -1,6 +1,6 @@
 package livi.assembly;
 
-import livi.assembly.Blocks.ModBlocks;
+import livi.assembly.MBlocks.ModBlocks;
 import livi.assembly.items.ModItems;
 import net.fabricmc.api.ModInitializer;
 

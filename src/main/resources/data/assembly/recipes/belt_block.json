@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " R "
+  ],
+  "key": {
+    "C": { "item": "minecraft:cobblestone" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": {
+    "item": "assembly:belt_block",
+    "count": 3
+  }
+}

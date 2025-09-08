@@ -1,10 +1,11 @@
-package livi.assembly.Blocks;
+package livi.assembly.MBlocks;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.HorizontalFacingBlock;
+import net.minecraft.block.*;
 
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
@@ -14,11 +15,12 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-
-import static net.minecraft.state.property.Properties.FACING;
 
 
 public class BeltBlock extends HorizontalFacingBlock {
@@ -40,7 +42,7 @@ public class BeltBlock extends HorizontalFacingBlock {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing().getOpposite());
+        return this.getDefaultState().with(FACING, ctx.getHorizontalPlayerFacing());
     }
 
     @Override
@@ -52,6 +54,11 @@ public class BeltBlock extends HorizontalFacingBlock {
     }
 
 
+    @Override
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        // 16 = 1 block; so 4 = 1/4 block high
+        return Block.createCuboidShape(0, 0, 0, 16, 4, 16);
+    }
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
@@ -61,7 +68,7 @@ public class BeltBlock extends HorizontalFacingBlock {
 
         for (ItemEntity item : items) {
             Direction dir = state.get(FACING);
-            Vec3d push = Vec3d.of(dir.getVector()).multiply(-0.1); //whitout the - it pushes against the placed direction
+            Vec3d push = Vec3d.of(dir.getVector()).multiply(0.1); //whitout the - it pushes against the placed direction
             item.addVelocity(push.x, 0, push.z);
 
             // Centering toward belt middle

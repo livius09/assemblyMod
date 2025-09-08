@@ -1,8 +1,6 @@
-package livi.assembly.Blocks;
+package livi.assembly.MBlocks;
 
 import livi.assembly.Assembly;
-import livi.assembly.items.ModItems;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -24,6 +22,8 @@ public class ModBlocks {
     public static Block SHOCKER_BLOCK;
     public static Block BREAKER_BLOCK;
     public static Block FARMER_BLOCK;
+    public static Block Placer_BLOCK;
+
 
     public static void initialize() {
         Assembly.LOGGER.info("Registering blocks...");
@@ -33,6 +33,7 @@ public class ModBlocks {
         SHOCKER_BLOCK = register("shocker_block", BeltBlock::new, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
         BREAKER_BLOCK = register("breaker_block", BreakerBlock::new, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
         FARMER_BLOCK = register("farmer_block", FarmerBlock::new, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
+        Placer_BLOCK = register("placer_block", PlacerBlock::new, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
 
         // Optional: also ensure they appear in your custom creative tab
         /*
