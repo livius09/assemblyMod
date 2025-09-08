@@ -1,0 +1,13 @@
+{
+  "block.assembly.belt_block": "Conveyor Belt",
+  "block.assembly.farmer_block": "Farmer",
+  "block.assembly.shocker_block": "Shocker",
+  "block.assembly.placer_block": "Placer",
+
+  "item.assembly.belt_block": "Conveyor Belt",
+  "item.assembly.farmer_block": "Farmer",
+  "item.assembly.shocker_block": "Shocker",
+  "item.assembly.placer_block": "Placer",
+
+  "itemGroup.assembly": "Assembly Mod"
+}

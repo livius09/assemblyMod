@@ -1,7 +1,7 @@
 package livi.assembly.items;
 
 import livi.assembly.Assembly;
-import livi.assembly.Blocks.ModBlocks;
+import livi.assembly.MBlocks.ModBlocks;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
@@ -27,7 +27,7 @@ public class ModItems {
     public static final RegistryKey<ItemGroup> ASSEMBLY_ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(Assembly.MOD_ID, "item_group"));
     public static final ItemGroup ASSEMBLY_ITEM_GROUP = FabricItemGroup.builder()
             .icon(() -> new ItemStack(Items.STONE_SLAB))
-            .displayName(Text.translatable("itemGroup.fabric_docs_reference"))
+            .displayName(Text.translatable("itemGroup.assembly"))
             .build();
 
 
@@ -37,7 +37,7 @@ public class ModItems {
     }
 
     public static void register_items(){
-        Assembly.LOGGER.info("initializing items for: "+Assembly.MOD_ID);
+        Assembly.LOGGER.info("initializing item for: "+Assembly.MOD_ID);
 
         Registry.register(Registries.ITEM_GROUP, ASSEMBLY_ITEM_GROUP_KEY, ASSEMBLY_ITEM_GROUP);
 
@@ -46,6 +46,7 @@ public class ModItems {
             entries.add(ModBlocks.SHOCKER_BLOCK.asItem());
             entries.add(ModBlocks.BREAKER_BLOCK.asItem());
             entries.add(ModBlocks.FARMER_BLOCK.asItem());
+            entries.add(ModBlocks.Placer_BLOCK.asItem());
 
         });
 
